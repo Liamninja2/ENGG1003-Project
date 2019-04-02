@@ -1,5 +1,13 @@
 #include <stdio.h>
 
 int main() {
-
+    printf("Select a Task:\n");
+    printf("1. Encryption of a message with a rotation cipher given the message text and rotation amount\n");
+    printf("2. Decryption of a message encrypted with a rotation cipher given cipher text and rotation amount\n");
+    printf("3. Encryption of a message with a substitution cipher given message text and alphabet substitution\n");
+    printf("4. Decryption of a message encrypted with a substitution cipher given cipher text and substitutions\n");
+    printf("5. Decryption of a message encrypted with a rotation cipher given cipher text only\n");
+    printf("6. Decryption of a message encrypted with a substitution cipher given cipher text only\n");
+    
+    return 0;
 }
