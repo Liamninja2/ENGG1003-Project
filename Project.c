@@ -14,14 +14,14 @@ int main() {
     scanf("%d", &Task);         //Reads a task value from user
     
         switch(Task) {             //Switch system that allows for each case to be executed independently from the others
-        
+
             case 1: ;       //This is an empty statement to allow initialisation on next line
             
-                char message1[1024];        //Initialises a string to be encoded
+                char message1[256];        //Initialises a string to be encoded
                 int c;                      //Initialises a value which represents each letter in the string
                 int shift;                  //Initialises a value which represents the rotation of the message
                 
-                printf("Enter a Message to Encrypt:\n");        
+                printf("Enter a Message to Encrypt\n");        
                 scanf("%s", message1);                          //Reads an input of a message to be encoded
                 
                 printf("Enter a value for which to shift the message\n");
@@ -45,9 +45,9 @@ int main() {
             
             case 2: ;
             
-                char message2[1024];        //Initialises a string to be decoded
+                char message2[256];        //Initialises a string to be decoded
                 
-                printf("Enter a Message to Decrypt:\n");        
+                printf("Enter a Message to Decrypt\n");        
                 scanf("%s", message2);                          //Reads an input of a message to be encoded
                 
                 printf("Enter the Rotation Value\n");
@@ -60,20 +60,55 @@ int main() {
                 for(c=0; message2[c] != '\0'; c++) {                //Takes every value and adds the shift value in order to reach new value
                     message2[c] = message2[c] - shift;
                     
-                    if(message2[c] < 'A') {                         //Values that exceed Z loop back to A and continue
+                    if(message2[c] < 'A') {                         //Values that are lower than A loop back to Z and continue
                         message2[c] = message2[c] + 26;
                     }
                 }
             
-                printf("Original Message: %s\n", message2);        //Prints final encrypted message
+                printf("Decrypted Message: %s\n", message2);        //Prints final encrypted message
             
                 break;
         
             case 3: ;
             
+                char message3[256];
+                char key[256];
+                char alphabet[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+                int i = 0;
+                
+                printf("Enter a Message to Decrypt\n");        
+                scanf("%s", message3);
+                
+                printf("Enter Key (in the form abcdef... where a = the a equivalent within key)\n");
+                scanf("%s", key);
+                
+                for(c=0; message3[c] != '\0'; c++) {
+                    
+                    while(c >= 0 && i < 26) {
+                                            
+                        if(message3[c] == alphabet[i]) {
+                        
+                        message3[c] = key[i];
+                        
+                        break;
+                        }
+                        
+                        else {
+                            i++;
+                        }
+                    }
+                    
+                    i = 0;
+                }
+                
+                printf("The Encrypted Message is: %s\n", message3);
+            
                 break;
         
             case 4: ;
+            
+                
+                
         
                 break;
                 
