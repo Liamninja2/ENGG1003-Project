@@ -72,15 +72,15 @@ int main() {
             case 3: ;
             
                 char message3[256];
-                char key[256];
+                char key1[26];
                 char alphabet[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
                 int i = 0;
                 
-                printf("Enter a Message to Decrypt\n");        
+                printf("Enter a Message to Encrypt\n");        
                 scanf("%s", message3);
                 
                 printf("Enter Key (in the form abcdef... where a = the a equivalent within key)\n");
-                scanf("%s", key);
+                scanf("%s", key1);
                 
                 for(c=0; message3[c] != '\0'; c++) {
                     
@@ -88,7 +88,7 @@ int main() {
                                             
                         if(message3[c] == alphabet[i]) {
                         
-                        message3[c] = key[i];
+                        message3[c] = key1[i];
                         
                         break;
                         }
@@ -107,8 +107,37 @@ int main() {
         
             case 4: ;
             
+                char message4[256];
+                char key2[26];
+                char alphabet2[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+                i = 0;
                 
+                printf("Enter a Message to Decrypt\n");        
+                scanf("%s", message4);
                 
+                printf("Enter Key (in the form abcdef... where a = the a equivalent within key)\n");
+                scanf("%s", key2);
+                
+                for(c=0; message4[c] != '\0'; c++) {
+                    
+                    while(c >= 0 && i < 26) {
+                                            
+                        if(message4[c] == key2[i]) {
+                        
+                        message4[c] = alphabet2[i];
+                        
+                        break;
+                        }
+                        
+                        else {
+                            i++;
+                        }
+                    }
+                    
+                    i = 0;
+                }
+                
+                printf("The Decrypted Message is: %s\n", message4);
         
                 break;
                 
