@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-    printf("Select a Task:\n");                                                                                     //Creates a "Menu"
+    printf("Select a Task (Input a number between 1 and 6):\n");                                                                                     //Creates a "Menu"
     printf("1. Encryption of a message with a rotation cipher given the message text and rotation amount\n");           //Task 1 
     printf("2. Decryption of a message encrypted with a rotation cipher given cipher text and rotation amount\n");      //Task 2
     printf("3. Encryption of a message with a substitution cipher given message text and alphabet substitution\n");     //Task 3
@@ -43,7 +43,7 @@ int main() {
                 
                 break;
             
-            case 2: ;
+            case 2: ;       //This is an empty statement to allow initialisation on next line
             
                 char message2[256];        //Initialises a string to be decoded
                 
@@ -69,84 +69,101 @@ int main() {
             
                 break;
         
-            case 3: ;
+            case 3: ;       //This is an empty statement to allow initialisation on next line
             
-                char message3[256];
-                char key1[26];
-                char alphabet[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-                int i = 0;
+                char message3[256];                 //Initialises a string to be encoded
+                char key1[26];                      //Initialises a key which will resemble the alphabet's subsitution
+                char alphabet[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};     //Initialises the alphabet
+                int i = 0;                      //Initialises a value to assist with determining string values
                 
                 printf("Enter a Message to Encrypt\n");        
-                scanf("%s", message3);
+                scanf("%s", message3);                              //Reads an input message to be encoded
                 
                 printf("Enter Key (in the form abcdef... where a = the a equivalent within key)\n");
-                scanf("%s", key1);
+                scanf("%s", key1);                                  //Reads an input key which is 26 charcters long, each letter corresponding to the same numbered letter in the alphabet
                 
                 for(c=0; message3[c] != '\0'; c++) {
                     
                     while(c >= 0 && i < 26) {
                                             
-                        if(message3[c] == alphabet[i]) {
+                        if(message3[c] == alphabet[i]) {                    //Checks to see if the cth letter of the message is the same as the ith letter of the alphabet
                         
-                        message3[c] = key1[i];
+                        message3[c] = key1[i];                              //If the cth letter is the same, it gets changed to the ith letter if the key
                         
                         break;
                         }
                         
                         else {
-                            i++;
+                            i++;                                            //Increments i to make sure all letters in alphabet are checked for each letter of the message
                         }
                     }
                     
-                    i = 0;
+                    i = 0;                                                  //Resets the value of i before restarting the loop
                 }
                 
-                printf("The Encrypted Message is: %s\n", message3);
+                printf("The Encrypted Message is: %s\n", message3);         //Prints the encrypted message
             
                 break;
         
-            case 4: ;
+            case 4: ;       //This is an empty statement to allow initialisation on next line
             
-                char message4[256];
-                char key2[26];
-                char alphabet2[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+                char message4[256];                     //Initialises a string to be decrypted
+                char key2[26];                          //Initialises a key which will resemble the alphabet's substitution
+                char alphabet2[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};    //Initialises the alphabet
                 i = 0;
                 
                 printf("Enter a Message to Decrypt\n");        
-                scanf("%s", message4);
+                scanf("%s", message4);                                      //Reads an input message which will be decrypted
                 
                 printf("Enter Key (in the form abcdef... where a = the a equivalent within key)\n");
-                scanf("%s", key2);
+                scanf("%s", key2);                                          //Reads an input key which is 26 charcters long, each letter corresponding to the same numbered letter in the alphabet         
                 
                 for(c=0; message4[c] != '\0'; c++) {
                     
                     while(c >= 0 && i < 26) {
                                             
-                        if(message4[c] == key2[i]) {
+                        if(message4[c] == key2[i]) {                        //Checks to see if the cth letter of the message is the same as the ith letter in the key
                         
-                        message4[c] = alphabet2[i];
+                        message4[c] = alphabet2[i];                         //If the cth letter is the same, it gets changed to the ith letter of the alphabet
                         
                         break;
                         }
                         
                         else {
-                            i++;
+                            i++;                                            //Increments i to make sure all letters in key are tested
                         }
                     }
                     
-                    i = 0;
+                    i = 0;                                                  //Resets value of i before loop repeats
                 }
                 
-                printf("The Decrypted Message is: %s\n", message4);
+                printf("The Decrypted Message is: %s\n", message4);         //Prints the decrypted message
         
                 break;
                 
-            case 5: ;
+            case 5: ;       //This is an empty statement to allow initialisation on next line
+                
+                char message5[256];
+                shift = 0;
+                
+                printf("Enter a Message to Decrypt\n");        
+                scanf("%s", message5);                          //Reads an input message which will be decrypted
+                
+                while //message 5 is not a word 
+                
+                for(c=0; message5[c] != '\0'; c++) {
+                    
+                    message5[c] = message5[c] + shift
+                }
+
+                //check dictionary for a word that resembles that
             
                 break;
         
-            case 6: ;
-            
+            case 6: ;       //This is an empty statement to allow initialisation on next line
+                
+                char message6[256];
+                
                 break;
             
             default:
