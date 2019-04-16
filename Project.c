@@ -34,7 +34,7 @@ int main() {
                 for(c=0; message1[c] != '\0'; c++) {                //Takes every value and adds the shift value in order to reach new value
                     message1[c] = message1[c] + shift;
                     
-                    if(message1[c] > 'Z') {                         //Values that exceed Z loop back to A and continue
+                    if(message1[c] > 'Z' || message1[c] > 'z') {                         //Values that exceed Z loop back to A and continue
                         message1[c] = message1[c] - 26;
                     }
                 }
@@ -144,25 +144,34 @@ int main() {
             case 5: ;       //This is an empty statement to allow initialisation on next line
                 
                 char message5[256];
+                char message5option[256];
                 shift = 0;
                 
                 printf("Enter a Message to Decrypt\n");        
                 scanf("%s", message5);                          //Reads an input message which will be decrypted
                 
-                while //message 5 is not a word 
-                
-                for(c=0; message5[c] != '\0'; c++) {
+                while(shift < 26) {
                     
-                    message5[c] = message5[c] + shift
+                    for(c=0; message5[c] != '\0'; c++) {
+                    
+                        message5option[c] = message5[c] - shift;
+                        
+                        if(message5option[c] < 'A') {
+                            message5option[c] = message5option[c] + 26;
+                        }
+                    }
+                    
+                    printf("Message shifted by %d is: %s\n\n", shift, message5option);
+                    
+                    shift++;
                 }
 
-                //check dictionary for a word that resembles that
             
                 break;
         
             case 6: ;       //This is an empty statement to allow initialisation on next line
                 
-                char message6[256];
+                //char message6[256];
                 
                 break;
             
