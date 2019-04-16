@@ -27,8 +27,15 @@ int main() {
                 printf("Enter a value for which to shift the message\n");
                 scanf("%d", &shift);                                            //Reads a value for the rotation
                 
-                printf("Original Message: %s\n", message1);         //Both print the values just input by user
-                printf("Shift Value: %d\n", shift);
+                for(c=0; message1[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
+                    
+                    if(message1[c] >= 'a') {                    
+                        message1[c] = message1[c] - 32;
+                    }
+                }
+                
+                printf("Original Message: %s\n", message1);         //Both print the values input by user
+                printf("Rotation Value: %d\n", shift);
                 
                 
                 for(c=0; message1[c] != '\0'; c++) {                //Takes every value and adds the shift value in order to reach new value
@@ -53,18 +60,26 @@ int main() {
                 printf("Enter the Rotation Value\n");
                 scanf("%d", &shift);                            //Reads a value for the rotation
                 
-                printf("Encoded Message: %s\n", message2);         //Both print the values just input by user
+                for(c=0; message2[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
+                    
+                    if(message2[c] >= 'a') {                    
+                        message2[c] = message2[c] - 32;
+                    }
+                }
+
+                printf("Encoded Message: %s\n", message2);         //Both print the values input by user
                 printf("Rotation Value: %d\n", shift);
                 
                 
                 for(c=0; message2[c] != '\0'; c++) {                //Takes every value and adds the shift value in order to reach new value
+                    
                     message2[c] = message2[c] - shift;
                     
                     if(message2[c] < 'A') {                         //Values that are lower than A loop back to Z and continue
                         message2[c] = message2[c] + 26;
                     }
                 }
-            
+        
                 printf("Decrypted Message: %s\n", message2);        //Prints final encrypted message
             
                 break;
@@ -81,6 +96,23 @@ int main() {
                 
                 printf("Enter Key (in the form abcdef... where a = the a equivalent within key)\n");
                 scanf("%s", key1);                                  //Reads an input key which is 26 charcters long, each letter corresponding to the same numbered letter in the alphabet
+                
+                for(c=0; message3[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
+                    
+                    if(message3[c] >= 'a') {                    
+                        message3[c] = message3[c] - 32;
+                    }
+                }
+                
+                for(c=0; key1[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
+                    
+                    if(key1[c] >= 'a') {                    
+                        key1[c] = key1[c] - 32;
+                    }
+                }
+                
+                printf("Original Message: %s\n", message3);         //Both print the values input by user
+                printf("Key: %s\n", key1);
                 
                 for(c=0; message3[c] != '\0'; c++) {
                     
@@ -117,6 +149,23 @@ int main() {
                 
                 printf("Enter Key (in the form abcdef... where a = the a equivalent within key)\n");
                 scanf("%s", key2);                                          //Reads an input key which is 26 charcters long, each letter corresponding to the same numbered letter in the alphabet         
+                
+                for(c=0; message4[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
+                    
+                    if(message4[c] >= 'a') {                    
+                        message4[c] = message4[c] - 32;
+                    }
+                }
+                
+                for(c=0; key2[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
+                    
+                    if(key2[c] >= 'a') {                    
+                        key2[c] = key2[c] - 32;
+                    }
+                }
+                
+                printf("Encoded Message: %s\n", message4);         //Both print the values input by user
+                printf("Key: %s\n", key2);
                 
                 for(c=0; message4[c] != '\0'; c++) {
                     
