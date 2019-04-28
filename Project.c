@@ -2,6 +2,12 @@
 #include <string.h>
 
 int main() {
+    
+    FILE *Input;
+    FILE *Output;
+    FILE *Dictionary;
+    
+    
     printf("Select a Task (Input a number between 1 and 6):\n");                                                                                     //Creates a "Menu" which allows user to select the task they which to utilise
     printf("1. Encryption of a message with a rotation cipher given the message text and rotation amount\n");           //Task 1 
     printf("2. Decryption of a message encrypted with a rotation cipher given cipher text and rotation amount\n");      //Task 2
@@ -18,26 +24,32 @@ int main() {
 
             case 1: ;       //This is an empty statement to allow initialisation on next line
             
-                char message1[256];        //Initialises a string to be encoded
+                char message1[1024];        //Initialises a string to be encoded
                 int c;                      //Initialises a value which represents each letter in the string
                 int shift;                  //Initialises a value which represents the rotation of the message
+                int i = 0;
+                     
+                Input = fopen("Input.txt", "r");
                 
-                printf("Enter a Message to Encrypt\n");        
-                scanf("%s", message1);                          //Reads an input of a message to be encoded
+                while(fgets(message1, 1024, Input)) {                               //Reads an input of a message to be encoded from Input.txt file on line 15 by ignoring each line until line 15
                 
-                printf("Enter a value for which to shift the message\n");
-                scanf("%d", &shift);                                            //Reads a value for the rotation
+                    i++;
+                    if(i == 15) {
+                        break;
+                    }
+                }      
                 
+                fclose(Input);
+                
+                printf("Enter a value for which to rotate the text by:\n");
+                scanf("%d", &shift);   
+            
                 for(c=0; message1[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
                     
                     if(message1[c] >= 'a') {                    
                         message1[c] = message1[c] - 32;
                     }
-                }
-                
-                printf("Original Message: %s\n", message1);         //Both print the values input by user
-                printf("Rotation Value: %d\n", shift);
-                
+                }        
                 
                 for(c=0; message1[c] != '\0'; c++) {                //Takes every value and adds the shift value in order to reach new value
                     message1[c] = message1[c] + shift;
@@ -47,19 +59,33 @@ int main() {
                     }
                 }
             
-                printf("Encrypted Message: %s\n", message1);        //Prints final encrypted message
+                Output = fopen("Output.txt", "w");
+                
+                fprintf(Output, "Encrypted Message after shifting by %d is: %s\n", shift, message1);        //Prints final encrypted message to Output.txt file
+                
+                fclose(Output);
                 
                 break;
             
             case 2: ;       //This is an empty statement to allow initialisation on next line
             
-                char message2[256];        //Initialises a string to be decoded
+                char message2[1024];        //Initialises a string to be decoded
+                i = 0;
                 
-                printf("Enter a Message to Decrypt\n");        
-                scanf("%s", message2);                          //Reads an input of a message to be encoded
+                Input = fopen("Input.txt", "r");
                 
-                printf("Enter the Rotation Value\n");
-                scanf("%d", &shift);                            //Reads a value for the rotation
+                while(fgets(message2, 1024, Input)) {                               //Reads an input of a message to be decrypted from Input.txt file on line 4 by ignoring each line until line 4
+                
+                    i++;
+                    if(i == 4) {
+                        break;
+                    }
+                }      
+                
+                fclose(Input);
+                
+                printf("Enter the known Rotation Value\n");
+                scanf("%d", &shift);                            //Reads a value for the rotation already known by the user
                 
                 for(c=0; message2[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
                     
@@ -67,10 +93,6 @@ int main() {
                         message2[c] = message2[c] - 32;
                     }
                 }
-
-                printf("Encoded Message: %s\n", message2);         //Both print the values input by user
-                printf("Rotation Value: %d\n", shift);
-                
                 
                 for(c=0; message2[c] != '\0'; c++) {                //Takes every value and adds the shift value in order to reach new value
                     
@@ -81,22 +103,40 @@ int main() {
                     }
                 }
         
-                printf("Decrypted Message: %s\n", message2);        //Prints final encrypted message
+                Output = fopen("Output.txt", "w");
+                
+                fprintf(Output, "Decrypted Message after shifting by %d is: %s\n", shift, message2);        //Prints final decrypted message to Output.txt file
+                
+                fclose(Output);
             
                 break;
         
             case 3: ;       //This is an empty statement to allow initialisation on next line
             
-                char message3[256];                 //Initialises a string to be encoded
+                char message3[1024];                 //Initialises a string to be encoded
                 char key1[26];                      //Initialises a key which will resemble the alphabet's subsitution
                 char alphabet[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};     //Initialises the alphabet
-                int i = 0;                      //Initialises a value to assist with determining string values
+                i = 0;                      //Initialises a value to assist with determining string values
                 
-                printf("Enter a Message to Encrypt\n");        
-                scanf("%s", message3);                              //Reads an input message to be encoded
+                Input = fopen("Input.txt", "r");
                 
-                printf("Enter Key (in the form abcdef... where a = the a equivalent within key)\n");
-                scanf("%s", key1);                                  //Reads an input key which is 26 charcters long, each letter corresponding to the same numbered letter in the alphabet
+                while(fgets(message3, 1024, Input)) {                               //Reads an input of a message to be encoded from Input.txt file on line 15 by ignoring each line until line 15
+                
+                    i++;
+                    if(i == 15) {
+                        break;
+                    }
+                }      
+                
+                while(fgets(key1, 1024, Input)) {                               //Reads an input key which is 26 charcters long, each letter corresponding to the same numbered letter in the alphabet from Input.txt   
+                
+                    i++;
+                    if(i == 18) {
+                        break;
+                    }
+                }            
+                
+                fclose(Input);
                 
                 for(c=0; message3[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
                     
@@ -111,9 +151,6 @@ int main() {
                         key1[c] = key1[c] - 32;
                     }
                 }
-                
-                printf("Original Message: %s\n", message3);         //Both print the values input by user
-                printf("Key: %s\n", key1);
                 
                 for(c=0; message3[c] != '\0'; c++) {
                     
@@ -134,22 +171,41 @@ int main() {
                     i = 0;                                                  //Resets the value of i before restarting the loop
                 }
                 
-                printf("The Encrypted Message is: %s\n", message3);         //Prints the encrypted message
-            
+                Output = fopen("Output.txt", "w");
+                
+                fprintf(Output, "The Encrypted Message is: %s\n", message3);         //Prints the encrypted message to Output.txt
+                
+                fclose(Output);
+                
                 break;
         
             case 4: ;       //This is an empty statement to allow initialisation on next line
             
-                char message4[256];                     //Initialises a string to be decrypted
+                char message4[1024];                     //Initialises a string to be decrypted
                 char key2[26];                          //Initialises a key which will resemble the alphabet's substitution
                 char alphabet2[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};    //Initialises the alphabet
                 i = 0;
                 
-                printf("Enter a Message to Decrypt\n");        
-                scanf("%s", message4);                                      //Reads an input message which will be decrypted
+                Input = fopen("Input.txt", "r");
                 
-                printf("Enter Key (in the form abcdef... where a = the a equivalent within key)\n");
-                scanf("%s", key2);                                          //Reads an input key which is 26 charcters long, each letter corresponding to the same numbered letter in the alphabet         
+                while(fgets(message4, 1024, Input)) {                               //Reads an input of a message to be decrypted from Input.txt file on line 15 by ignoring each line until line 15
+                
+                    i++;
+                    if(i == 4) {
+                        break;
+                    }
+                }      
+                
+                while(fgets(key2, 1024, Input)) {                               //Reads an input key which is 26 charcters long, each letter corresponding to the same numbered letter in the alphabet from Input.txt   
+                
+                    i++;
+                    if(i == 10) {
+                        break;
+                    }
+                }            
+                
+                fclose(Input);  
+                i = 0;
                 
                 for(c=0; message4[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
                     
@@ -164,9 +220,6 @@ int main() {
                         key2[c] = key2[c] - 32;
                     }
                 }
-                
-                printf("Encoded Message: %s\n", message4);         //Both print the values input by user
-                printf("Key: %s\n", key2);
                 
                 for(c=0; message4[c] != '\0'; c++) {
                     
@@ -187,45 +240,71 @@ int main() {
                     i = 0;                                                  //Resets value of i before loop repeats
                 }
                 
-                printf("The Decrypted Message is: %s\n", message4);         //Prints the decrypted message
-        
+                Output = fopen("Output.txt", "w");
+                
+                fprintf(Output, "The Decrypted Message is: %s\n", message4);         //Prints the decrypted message to Output.txt
+
+                fclose(Output);
+
                 break;
                 
             case 5: ;       //This is an empty statement to allow initialisation on next line
                 
-                char message5[256];
-                char message5option[256];
-                char DictionaryLine[256];
+                char message5[1024];
+                char message5firstword[100];
+                char message5option[1024];
+                char DictionaryLine[1024];
                 int length;
                 shift = 0;
+                int determinedshift;   
+                i = 0;
                 
-                printf("Enter a Message to Decrypt\n");        
-                scanf("%s", message5);                          //Reads an input message which will be decrypted      
+                Input = fopen("Input.txt", "r+");
                 
-                length = strlen(message5);
+                while(fgets(message5firstword, 1024, Input)) {
                 
-                for(c=0; message5[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
-                    
-                    if(message5[c] >= 'a') {                    
-                        message5[c] = message5[c] - 32;
+                    i++;
+                    if(i == 7) {
+                        break;
                     }
+                }
+
+                i = 0;
+                fclose(Input);
+                
+                for(c=0; c <= 100; c++) {
+                    
+                    if(message5firstword[c] == '\n') {
+                        message5firstword[c] = '\0';
+                        break;
+                    }
+                }
+                
+                length = strlen(message5firstword);
+                length = length - 1;
+                
+                for(c=0; message5firstword[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
+                    
+                    if(message5firstword[c] >= 'a') {                    
+                        message5firstword[c] = message5firstword[c] - 32;
+                    }
+         
                 }
                 
                 while(shift < 26) {
                     
-                    for(c=0; message5[c] != '\0'; c++) {
+                    for(c=0; message5firstword[c] != '\0'; c++) {
                     
-                        message5option[c] = message5[c] - shift;
-                        
+                        message5option[c] = message5firstword[c] - shift;
+
                         if(message5option[c] < 'A') {
                             message5option[c] = message5option[c] + 26;
                         }   
                     }
                     
-                    printf("The current option after rotation by %d is %s\n", shift, message5option);
+                    printf("An option for the first word after rotation by %d is %s\n", shift, message5option);
 
-                    FILE *Dictionary;
-                    Dictionary = fopen("words.txt", "r+");
+                    Dictionary = fopen("less_words.txt", "r+");
                     
                     while(fgets(DictionaryLine, sizeof DictionaryLine, Dictionary) != NULL) {
                         
@@ -238,9 +317,10 @@ int main() {
                         
                         if(strncmp(DictionaryLine, message5option, length) == 0) {
                            
-                            printf("The decrypted message is %s\n", message5option);
-                            return 0;
+                            printf("\nThe decrypted first word of the message is potentially %s\n\n", message5option);
                             
+                            determinedshift = shift;
+                            break;
                         }
                     } 
                     
@@ -249,7 +329,49 @@ int main() {
                     shift++; 
                 } 
 
+                Input = fopen("Input.txt", "r+");
+                
+                while(fgets(message5, 1024, Input)) {
+                
+                    i++;
+                    if(i == 4) {
+                        break;
+                    }
+                }
+                
+                fclose(Input);
+                
+                for(c=0; message5[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
+                    
+                    if(message5[c] >= 'a') {                    
+                        message5[c] = message5[c] - 32;
+                    }
+         
+                }
+                
+                for(c=0; message5[c] != '\0'; c++) {
+                    
+                    if(message5[c] < 'A') {
+                        c++;
+                    }
 
+                    message5[c] = message5[c] - determinedshift;
+                    
+                    if(message5[c] < 'A') {
+                        message5[c] = message5[c] + 26;
+                    }
+                    
+                    if(message5[c] == 32 + 26 - determinedshift) {
+                        message5[c] = 32;
+                    }
+                }
+                
+                Output = fopen("Output.txt", "w");
+                
+                fprintf(Output, "The decrypted message is: %s", message5);
+                
+                fclose(Output);
+                
                 break;
         
             case 6: ;       //This is an empty statement to allow initialisation on next line
