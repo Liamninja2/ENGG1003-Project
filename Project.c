@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include <string.h>
 
 int main() {
-    printf("Select a Task (Input a number between 1 and 6):\n");                                                                                     //Creates a "Menu"
+    printf("Select a Task (Input a number between 1 and 6):\n");                                                                                     //Creates a "Menu" which allows user to select the task they which to utilise
     printf("1. Encryption of a message with a rotation cipher given the message text and rotation amount\n");           //Task 1 
     printf("2. Decryption of a message encrypted with a rotation cipher given cipher text and rotation amount\n");      //Task 2
     printf("3. Encryption of a message with a substitution cipher given message text and alphabet substitution\n");     //Task 3
@@ -194,10 +195,21 @@ int main() {
                 
                 char message5[256];
                 char message5option[256];
+                char DictionaryLine[256];
+                int length;
                 shift = 0;
                 
                 printf("Enter a Message to Decrypt\n");        
-                scanf("%s", message5);                          //Reads an input message which will be decrypted
+                scanf("%s", message5);                          //Reads an input message which will be decrypted      
+                
+                length = strlen(message5);
+                
+                for(c=0; message5[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
+                    
+                    if(message5[c] >= 'a') {                    
+                        message5[c] = message5[c] - 32;
+                    }
+                }
                 
                 while(shift < 26) {
                     
@@ -207,15 +219,37 @@ int main() {
                         
                         if(message5option[c] < 'A') {
                             message5option[c] = message5option[c] + 26;
-                        }
+                        }   
                     }
                     
-                    printf("Message shifted by %d is: %s\n\n", shift, message5option);
-                    
-                    shift++;
-                }
+                    printf("The current option after rotation by %d is %s\n", shift, message5option);
 
-            
+                    FILE *Dictionary;
+                    Dictionary = fopen("words.txt", "r+");
+                    
+                    while(fgets(DictionaryLine, sizeof DictionaryLine, Dictionary) != NULL) {
+                        
+                        for(c=0; DictionaryLine[c] != '\0'; c++) {              //Converts lower case letters in input into upper case letters before continuing
+                    
+                            if(DictionaryLine[c] >= 'a') {                    
+                            DictionaryLine[c] = DictionaryLine[c] - 32;
+                            }
+                        }
+                        
+                        if(strncmp(DictionaryLine, message5option, length) == 0) {
+                           
+                            printf("The decrypted message is %s\n", message5option);
+                            return 0;
+                            
+                        }
+                    } 
+                    
+                    fclose(Dictionary); 
+                        
+                    shift++; 
+                } 
+
+
                 break;
         
             case 6: ;       //This is an empty statement to allow initialisation on next line
@@ -224,7 +258,9 @@ int main() {
                 
                 break;
             
-            default:
+            default: 
+            
+                printf("Your failure to enter a number between 1 and 6 is astonoshing. Program will now  proceed to internally combust");
             
                 return 0;
          }
