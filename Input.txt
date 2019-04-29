@@ -3,7 +3,7 @@ FOR DECRYPTIONS-
 Enter the full cipher text you wish to decrypt on the line below:
 
 
-Enter the first word of the cipher text on the line below if rotational value is not given:
+Enter the first word of the cipher text on the line below if rotational value is not given (If first word fails, use first word with more than 4 letters):
 
 
 Enter the key for substitution cipher on the line below if known (in the form abcdef... where a = the a equivalent within key):
